@@ -40,4 +40,8 @@ public abstract class ViewerConfigurationImpl implements ViewerConfiguration {
         // empty implementation
     }
 
+    public static class Slot extends ViewerConfigurationImpl {
+        // empty implementation
+    }
+
 }

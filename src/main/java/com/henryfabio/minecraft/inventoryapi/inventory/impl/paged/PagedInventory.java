@@ -6,7 +6,10 @@ import com.henryfabio.minecraft.inventoryapi.inventory.impl.CustomInventoryImpl;
 import com.henryfabio.minecraft.inventoryapi.item.supplier.InventoryItemSupplier;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
+import com.henryfabio.minecraft.inventoryapi.viewer.impl.slot.SlotViewer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -56,5 +59,13 @@ public abstract class PagedInventory extends CustomInventoryImpl {
     }
 
     protected abstract List<InventoryItemSupplier> createPageItems(@NotNull PagedViewer viewer);
+
+    @Override
+    public final String getType() { return "Paged"; }
+
+    @Override
+    public void onItemClick(@NotNull SlotViewer viewer, @NotNull InventoryClickEvent event) {
+        // empty method
+    }
 
 }

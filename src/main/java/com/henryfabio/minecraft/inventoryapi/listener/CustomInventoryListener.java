@@ -7,6 +7,7 @@ import com.henryfabio.minecraft.inventoryapi.event.impl.CustomInventoryCloseEven
 import com.henryfabio.minecraft.inventoryapi.item.callback.ItemCallback;
 import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
+import com.henryfabio.minecraft.inventoryapi.viewer.impl.slot.SlotViewer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,12 +46,25 @@ public final class CustomInventoryListener implements Listener {
 
         ViewerController viewerController = InventoryManager.getViewerController();
         viewerController.findViewer(player.getName()).ifPresent(viewer -> {
-            event.setCancelled(true);
 
             CustomInventoryClickEvent clickEvent = new CustomInventoryClickEvent(viewer, event);
             Bukkit.getPluginManager().callEvent(clickEvent);
 
-            if (clickedInventory.getType().equals(InventoryType.PLAYER)) return;
+            if(viewer.getCustomInventory().getType().equals("Slot")) {
+
+                if(event.isShiftClick()) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                if (!clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                    viewer.getCustomInventory().onItemClick((SlotViewer) viewer, event);
+                }
+
+            }else {
+                event.setCancelled(true);
+                if (clickedInventory.getType().equals(InventoryType.PLAYER)) return;
+            }
 
             InventoryEditor editor = viewer.getEditor();
             ItemCallback itemCallback = editor.getItemCallback(event.getRawSlot());

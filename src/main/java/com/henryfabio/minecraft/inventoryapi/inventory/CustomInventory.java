@@ -2,7 +2,11 @@ package com.henryfabio.minecraft.inventoryapi.inventory;
 
 import com.henryfabio.minecraft.inventoryapi.inventory.configuration.InventoryConfiguration;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
+import com.henryfabio.minecraft.inventoryapi.viewer.impl.ViewerImpl;
+import com.henryfabio.minecraft.inventoryapi.viewer.impl.slot.SlotViewer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,5 +37,9 @@ public interface CustomInventory {
     void openInventory(@NotNull Player player);
 
     void updateInventory(@NotNull Player player);
+
+    String getType();
+
+    void onItemClick(@NotNull SlotViewer viewer, @NotNull InventoryClickEvent event);
 
 }

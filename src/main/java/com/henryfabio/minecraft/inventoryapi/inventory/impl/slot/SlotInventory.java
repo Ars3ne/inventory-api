@@ -1,9 +1,8 @@
-package com.henryfabio.minecraft.inventoryapi.inventory.impl.simple;
+package com.henryfabio.minecraft.inventoryapi.inventory.impl.slot;
 
 import com.henryfabio.minecraft.inventoryapi.inventory.configuration.impl.InventoryConfigurationImpl;
 import com.henryfabio.minecraft.inventoryapi.inventory.impl.CustomInventoryImpl;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
-import com.henryfabio.minecraft.inventoryapi.viewer.impl.simple.SimpleViewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.slot.SlotViewer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -16,15 +15,15 @@ import java.util.function.Consumer;
  * @author Henry Fábio
  * Github: https://github.com/HenryFabio
  */
-public abstract class SimpleInventory extends CustomInventoryImpl {
+public abstract class SlotInventory extends CustomInventoryImpl {
 
-    public SimpleInventory(String id, String title, int size) {
-        super(id, title, size, new InventoryConfigurationImpl.Simple());
+    public SlotInventory(String id, String title, int size) {
+        super(id, title, size, new InventoryConfigurationImpl.Slot());
     }
 
     @Override
     public final <T extends Viewer> void openInventory(@NotNull Player player, Consumer<T> viewerConsumer) {
-        Viewer viewer = new SimpleViewer(player.getName(), this);
+        Viewer viewer = new SlotViewer(player.getName(), this);
         defaultOpenInventory(player, viewer, viewerConsumer);
     }
 
@@ -33,17 +32,17 @@ public abstract class SimpleInventory extends CustomInventoryImpl {
         super.updateInventory(player);
     }
 
-    protected void configureViewer(@NotNull SimpleViewer viewer) {
+    protected void configureViewer(@NotNull SlotViewer viewer) {
         // empty method
     }
 
     @Override
     protected final void configureViewer(@NotNull Viewer viewer) {
-        this.configureViewer(((SimpleViewer) viewer));
+        this.configureViewer(((SlotViewer) viewer));
     }
 
     @Override
-    public final String getType() { return "Simple"; }
+    public final String getType() { return "Slot"; }
 
     @Override
     public void onItemClick(@NotNull SlotViewer viewer, @NotNull InventoryClickEvent event) {

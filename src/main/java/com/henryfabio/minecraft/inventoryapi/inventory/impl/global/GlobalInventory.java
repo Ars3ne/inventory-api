@@ -6,11 +6,14 @@ import com.henryfabio.minecraft.inventoryapi.inventory.configuration.impl.Invent
 import com.henryfabio.minecraft.inventoryapi.inventory.impl.CustomInventoryImpl;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.global.GlobalViewer;
+import com.henryfabio.minecraft.inventoryapi.viewer.impl.slot.SlotViewer;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -83,6 +86,14 @@ public abstract class GlobalInventory extends CustomInventoryImpl {
 
         this.configureInventory(this.inventoryEditor);
         this.update(this.inventoryEditor);
+    }
+
+    @Override
+    public final String getType() { return "Global"; }
+
+    @Override
+    public void onItemClick(@NotNull SlotViewer viewer, @NotNull InventoryClickEvent event) {
+        // empty method
     }
 
 }

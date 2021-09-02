@@ -4,6 +4,7 @@ import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
 import com.henryfabio.minecraft.inventoryapi.tests.inventory.TestGlobalInventory;
 import com.henryfabio.minecraft.inventoryapi.tests.inventory.TestPagedInventory;
 import com.henryfabio.minecraft.inventoryapi.tests.inventory.TestSimpleInventory;
+import com.henryfabio.minecraft.inventoryapi.tests.inventory.TestSlotInventory;
 import com.henryfabio.minecraft.inventoryapi.viewer.property.ViewerPropertyMap;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
@@ -22,6 +23,7 @@ public final class Main extends JavaPlugin implements Listener {
     public final TestSimpleInventory simpleInventory = new TestSimpleInventory().init();
     public final TestGlobalInventory globalInventory = new TestGlobalInventory().init();
     public final TestPagedInventory pagedInventory = new TestPagedInventory().init();
+    public final TestSlotInventory slotInventory = new TestSlotInventory().init();
 
     @Override
     public void onEnable() {
@@ -42,12 +44,19 @@ public final class Main extends JavaPlugin implements Listener {
                     propertyMap.set("boolean", true);
                     propertyMap.set("long", 20L);
                 });
+                event.setCancelled(true);
                 break;
             case IRON_BLOCK:
                 globalInventory.openInventory(player);
+                event.setCancelled(true);
                 break;
             case DIAMOND_BLOCK:
                 pagedInventory.openInventory(player);
+                event.setCancelled(true);
+                break;
+            case GOLD_BLOCK:
+                slotInventory.openInventory(player);
+                event.setCancelled(true);
                 break;
         }
     }
