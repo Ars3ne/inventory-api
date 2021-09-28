@@ -5,7 +5,7 @@ apply plugin: 'java-library'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group = 'com.henryfabio'
-version = '2.1.0-SNAPSHOT'
+version = '2.0.3-SNAPSHOT'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    def spigot = 'org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT'
+    def spigot = 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
     compileOnly spigot
     testCompileOnly spigot
 
@@ -43,14 +43,11 @@ processResources {
 
 buildscript {
     repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        jcenter()
     }
 
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
     }
 }
 
